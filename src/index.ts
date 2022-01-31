@@ -4,7 +4,7 @@ import resolvers from './graphQL/resolvers';
 import express, { Request, Response, } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import cors from 'cors';
-import dotenv from 'dotenv';
+
 import mongoose from 'mongoose';
 
 
@@ -13,7 +13,6 @@ async function initServer() {
   const app = express();
   app.use(cors());
 
-  dotenv.config();
   const apolloServer = new ApolloServer({
     typeDefs,
     resolvers,
@@ -28,10 +27,10 @@ async function initServer() {
   app.use((_req:Request, res:Response) => {
     res.send('Server started');
   });
-  const PORT = process.env.PORT || 5000;
+  const PORT = 5000;
   try {
 
-    await mongoose.connect(process.env.mongodb || '');
+    await mongoose.connect('mongodb+srv://admin:admin@mongoclaster.khhzn.mongodb.net/myFirstDatabase?retryWrites=true&w=majority' || '');
     console.log('connected');
 
   } catch (e) {
