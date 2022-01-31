@@ -2,10 +2,11 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
-  "type": "module",
+  "main": "dist/src/index.js",
   "scripts": {
-    "start": "ts-node-dev  --respawn --transpile-only ./src"
+    "build": "tsc",
+    "start": "node .",
+    "start:dev": "ts-node-dev  --respawn --transpile-only ./src"
 
   },
   "repository": {

@@ -2,9 +2,15 @@ import { Meetings } from '../../models';
 import { IMeeting } from '../../types';
 import { checkAuth, IAuthReq } from '../../middleware/isAuth';
 
+
 /** queries*/
 // ====================================================================
-export const getMeetings = async() => await Meetings.find().populate('creator').populate('users');
+export const getMeetings = async(_: any, __:any, req: IAuthReq) => {
+  const currentUserID = checkAuth(req);
+  return Meetings.find({ 'users': { $elemMatch: { $eq: currentUserID } } })
+    .populate('creator')
+    .populate('users');
+};
 
 
 /** mutations*/
